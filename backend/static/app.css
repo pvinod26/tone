@@ -1,0 +1,53 @@
+:root{--wine:#8a004f;--ink:#28232a;--muted:#77717a;--bg:#faf7f9;--line:#eee5eb;--live:#1e9e5a;--recent:#e0a100;--stale:#9a949c}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);overflow:hidden}
+.hidden{display:none!important}
+.muted{color:var(--muted);font-size:12px}
+.pad{padding:0 14px}
+#app{display:flex;flex-direction:column;height:100%}
+#mapwrap{position:relative;flex:1 1 56%;min-height:220px}
+#map{position:absolute;inset:0;background:#efeaee}
+#side{flex:0 0 44%;min-height:0;overflow-y:auto;background:#fff;border-top:1px solid var(--line);-webkit-overflow-scrolling:touch}
+.side-head{position:sticky;top:0;z-index:2;background:#fff;padding:10px 14px 8px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.brand{font-weight:850;letter-spacing:.14em;color:var(--wine);font-size:17px}
+#people{list-style:none;margin:0;padding:8px}
+.person{display:flex;align-items:center;gap:11px;padding:10px 11px;margin-bottom:7px;border:1px solid var(--line);border-radius:13px;cursor:pointer;background:#fff;-webkit-tap-highlight-color:transparent;transition:background .15s,border-color .15s}
+.person:hover{background:#fffafd;border-color:#d7a5c0}
+.person:focus-visible{outline:2px solid var(--wine);outline-offset:1px}
+.person.sel{background:#fff1f7;border-color:var(--wine);box-shadow:0 0 0 2px #8a004f22}
+.avatar{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--wine);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+.person.stale .avatar{background:var(--stale)}
+.info{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
+.pname{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pname em{font-style:normal;font-weight:600;color:var(--muted);font-size:12px}
+.pstatus{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--stale);flex:0 0 auto}
+.dot.live{background:var(--live);box-shadow:0 0 0 3px #1e9e5a2e}
+.dot.recent{background:var(--recent)}
+.locate{flex:0 0 auto;font-size:11px;font-weight:700;color:var(--wine);background:#f8e8f0;border-radius:8px;padding:5px 8px}
+.note{font-size:11px;color:var(--muted);line-height:1.45;margin:6px 0 18px}
+.chip{position:absolute;z-index:500;left:10px;background:#fff;border-radius:10px;padding:7px 10px;font-size:12px;font-weight:650;box-shadow:0 2px 10px rgba(35,12,25,.22);display:flex;align-items:center;gap:8px;max-width:calc(100% - 130px)}
+#conn{top:10px}
+#follow{top:10px;left:auto;right:10px;max-width:none}
+#conn:not(.hidden)~#follow{top:52px}
+.chip.warn{background:#fff4e0;color:#7a4b00}
+.chip button,#fitAll{border:0;border-radius:9px;background:var(--wine);color:#fff;font-weight:700;font-size:12px;padding:7px 10px;cursor:pointer}
+.chip button{background:#f8e8f0;color:var(--wine)}
+#fitAll{position:absolute;z-index:500;right:10px;bottom:24px;box-shadow:0 2px 10px rgba(35,12,25,.3);padding:10px 13px}
+.pin-wrap{background:transparent;border:0}
+.pin{display:flex;flex-direction:column;align-items:center;gap:3px;width:120px;pointer-events:auto}
+.pin .badge{width:40px;height:40px;border-radius:50%;background:var(--wine);color:#fff;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-weight:850;font-size:16px;line-height:1;box-shadow:0 3px 12px rgba(35,12,25,.35);transition:transform .15s}
+.pin .label{max-width:118px;padding:2px 7px;border-radius:7px;background:#fff;color:var(--ink);border:1px solid #eadde5;box-shadow:0 2px 7px rgba(35,12,25,.16);font-size:11px;font-weight:750;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pin.stale .badge{background:var(--stale)}
+.pin.stale .label{color:var(--muted)}
+.pin.sel .badge{transform:scale(1.2);box-shadow:0 0 0 5px #8a004f40,0 3px 12px rgba(35,12,25,.35)}
+.pin.sel .label{border-color:var(--wine);font-weight:850}
+.popup-name{font-weight:800}.popup-sub{color:var(--muted);font-size:12px}
+@media (min-width:821px){
+  #mapwrap{flex:1 1 auto}
+  #side{flex:0 0 340px;border-top:0;border-right:1px solid var(--line)}
+  #app{flex-direction:row}
+  #mapwrap{order:2}#side{order:1}
+}
+@media (prefers-reduced-motion:reduce){.person,.pin .badge{transition:none}}

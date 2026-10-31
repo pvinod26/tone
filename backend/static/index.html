@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sumo live map</title>
+<link rel="stylesheet" href="/static/vendor/leaflet.css">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<div id="app">
+  <section id="mapwrap" aria-label="Live map">
+    <div id="map"></div>
+    <div id="conn" class="chip warn hidden" role="status"></div>
+    <div id="follow" class="chip hidden"><span id="followText"></span><button id="followStop" type="button">Stop following</button></div>
+    <button id="fitAll" type="button" title="Show everyone">Show everyone</button>
+  </section>
+  <aside id="side" aria-label="People">
+    <div class="side-head">
+      <div class="brand">SUMO</div>
+      <div id="summary" class="muted">Loading…</div>
+    </div>
+    <ul id="people" aria-live="polite"></ul>
+    <p id="empty" class="muted pad hidden">Nobody is sharing right now.</p>
+    <p class="note pad">Everyone listed has chosen to share their live location with Sumo participants until they tap Stop sharing. Accuracy and update speed depend on each phone's GPS, signal and battery settings.</p>
+  </aside>
+</div>
+<script src="/static/vendor/leaflet.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

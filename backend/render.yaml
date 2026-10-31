@@ -1,0 +1,22 @@
+# Render blueprint. A persistent disk requires a paid instance type.
+# On the free plan remove the "disk" block: the app still works, and phones
+# automatically re-register if the database is wiped, but history is lost on restart.
+services:
+  - type: web
+    name: sumo-live-map
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 1 --threads 4 --timeout 60
+    healthCheckPath: /health
+    envVars:
+      - key: KINLY_DB_PATH
+        value: /var/data/sumo.sqlite3
+      - key: SUMO_PUBLIC_MAP
+        value: "0"
+      - key: SUMO_HIDE_AFTER_HOURS
+        value: "12"
+    disk:
+      name: sumo-data
+      mountPath: /var/data
+      sizeGB: 1
